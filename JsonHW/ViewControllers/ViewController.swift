@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             let alert = UIAlertController(
                 title: "Failed",
-                message: "You can see error in the Debug aria",
+                message: "You can see error in the Debug area",
                 preferredStyle: .alert
             )
             

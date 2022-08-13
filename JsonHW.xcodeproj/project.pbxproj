@@ -13,7 +13,7 @@
 		C52B2E0928A2996200309884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52B2E0728A2996200309884 /* Main.storyboard */; };
 		C52B2E0B28A2996400309884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C52B2E0A28A2996400309884 /* Assets.xcassets */; };
 		C52B2E0E28A2996400309884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C52B2E0C28A2996400309884 /* LaunchScreen.storyboard */; };
-		C52B2E1628A2997700309884 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B2E1528A2997700309884 /* Data.swift */; };
+		C52B2E1628A2997700309884 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B2E1528A2997700309884 /* Character.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		C52B2E0A28A2996400309884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C52B2E0D28A2996400309884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C52B2E0F28A2996400309884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C52B2E1528A2997700309884 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		C52B2E1528A2997700309884 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 		C52B2E1B28A29A3000309884 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C52B2E1528A2997700309884 /* Data.swift */,
+				C52B2E1528A2997700309884 /* Character.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 			files = (
 				C52B2E0628A2996200309884 /* ViewController.swift in Sources */,
 				C52B2E0228A2996200309884 /* AppDelegate.swift in Sources */,
-				C52B2E1628A2997700309884 /* Data.swift in Sources */,
+				C52B2E1628A2997700309884 /* Character.swift in Sources */,
 				C504DA9A28A2A44700626383 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DTKBA33P3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JsonHW/Info.plist;
@@ -347,7 +347,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DaniilPetrov.JsonHW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -362,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DTKBA33P3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JsonHW/Info.plist;
@@ -377,7 +377,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DaniilPetrov.JsonHW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

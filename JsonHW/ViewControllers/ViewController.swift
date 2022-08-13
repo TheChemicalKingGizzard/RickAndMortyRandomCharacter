@@ -9,57 +9,72 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let currentCharacterscount = 826
-    
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var characterName: UILabel!
     @IBOutlet var characterAvatar: UIImageView!
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var speciesLabel: UILabel!
+    @IBOutlet var typeLabel: UILabel!
+    
+    private let charactersCount = 826
+    private var character: Character?
     
     override func viewWillLayoutSubviews() {
         characterAvatar.layer.cornerRadius = characterAvatar.frame.width / 2
-        }
+    }
     
     @IBAction func fetchCharacter(_ sender: UIButton) {
-        
         guard
             let url = URL(string: "https://rickandmortyapi.com/api/character/" +
-                            "\(Int.random(in: 1...currentCharacterscount))")
-        else {
-            return
-        }
+                          "\(Int.random(in: 1...charactersCount))")
+        else { return }
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
                 print(error?.localizedDescription ?? "Empty error description")
                 return
             }
-            
             do {
-                let character = try JSONDecoder().decode(Person.self, from: data)
-                print(character)
+                self.character = try JSONDecoder().decode(
+                    Character.self,
+                    from: data
+                )
                 
-                guard
-                    let avatarUrl = URL(string: character.image ) else {
-                    return
+                DispatchQueue.main.async { [self] in
+                    guard let character = character else {
+                        return
+                    }
+                    configure(with: character)
                 }
-                URLSession.shared.dataTask(with: avatarUrl) {
-                    [weak self] data, _, _ in
-                    guard let avatarData = data else { return }
-                    
-                DispatchQueue.main.async {
-                    self?.nameLabel.isHidden = false
-                    self?.nameLabel.text = character.name
-                    self?.characterAvatar.image = UIImage(data: avatarData)
-                }
-                }.resume()
-                
-            } catch let error {
-                self?.failedAlert()
-                print(error)
             }
-            
+            catch let error {
+                print(error.localizedDescription)
+                self.failedAlert()
+            }
         }.resume()
     }
     
+}
+extension ViewController {
+    
+    func configure(with character: Character) {
+        characterName.isHidden = false
+        characterName.text = character.name
+        statusLabel.text = "Status: \(character.status)"
+        speciesLabel.text = "Species: \(character.species)"
+        typeLabel.text = "Type: \(character.type)"
+        
+        DispatchQueue.global().async {
+            guard let imageUrl = URL(string: character.image) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            
+            DispatchQueue.main.async {
+                self.characterAvatar.image = UIImage(data: imageData)
+            }
+        }
+    }
+}
+
+extension ViewController {
     private func failedAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(

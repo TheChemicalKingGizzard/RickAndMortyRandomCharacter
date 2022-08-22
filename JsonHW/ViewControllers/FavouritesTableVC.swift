@@ -17,7 +17,6 @@ class FavouritesTableVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         characters = StorageManager.shared.fetchCharacters()
     }
     

@@ -14,10 +14,13 @@ class RandomCharacterVC: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var addToFavButton: UIButton!
     
+    var delegate: RandomCharacterVCDelegate!
+    
     private var character: Character?
     private var jsonInfo: RickAndMorty?
     private var spinnerView = UIActivityIndicatorView()
-    private var characters: [Character] = []
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +34,17 @@ class RandomCharacterVC: UIViewController {
     
     @IBAction func fetchCharacter(_ sender: UIButton) {
         fetchChar()
+        print("000 \(character)")
     }
     
     @IBAction func addToFavourite(_ sender: UIButton) {
+        print("001 \(character)")
         guard let character = character else { return }
-        
-        characters.append(character)
-        print(characters.count)
+        print ("002 \(character)")
+        StorageManager.shared.addToFav(character: character)
+        print("003 \(character)")
+        delegate.add(character: character)
+        dismiss(animated: true)
     }
 }
 
@@ -79,6 +86,7 @@ extension RandomCharacterVC {
                 print(error.localizedDescription)
             }
         }.resume()
+        print("010 \(character)")
     }
     
     private func fetchImage() {
@@ -91,6 +99,7 @@ extension RandomCharacterVC {
                 print(error)
             }
         }
+        print("020 \(character)")
     }
     
     private func showSpinner(in view: UIView) {
@@ -102,17 +111,4 @@ extension RandomCharacterVC {
         
         view.addSubview(spinnerView)
     }
-
-/*
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     guard let indexPath = tableView.indexPathForSelectedRow else { return }
-     let character = isFiltering
-     ? filteredCharacter[indexPath.row]
-     : rickAndMorty?.results[indexPath.row]
-     guard let detailVC = segue.destination as? CharacterDetailsViewController else { return }
-     detailVC.character = character
- }
- */
 }
-
-

@@ -20,7 +20,7 @@ struct Info: Decodable {
     let prev: String?
 }
 
-struct Character: Decodable {
+struct Character: Codable {
 
     let id: Int
     let name: String
@@ -43,7 +43,7 @@ struct Character: Decodable {
 
 }
 
-struct Location: Decodable {
+struct Location: Codable {
     let name: String
     
 }

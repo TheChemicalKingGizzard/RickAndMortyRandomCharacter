@@ -36,6 +36,7 @@
  }
  */
 import Foundation
+import UIKit
 
 class StorageManager {
     static let shared = StorageManager()
@@ -64,4 +65,11 @@ class StorageManager {
         guard let data = try? JSONEncoder().encode(characters) else { return }
         defaults.set(data, forKey: characterKey)
     }
+}
+
+class TransferManager {
+    static let shared = TransferManager()
+    
+    var transferedCharacter: Character?
+    var transferedAvatar: UIImage?
 }

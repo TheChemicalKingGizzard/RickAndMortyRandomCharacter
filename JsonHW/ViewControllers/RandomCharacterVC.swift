@@ -7,30 +7,35 @@
 
 import UIKit
 
-class RandomCharacterVC: UIViewController {
+class RandomCharacterVC: UIViewController{
     
     @IBOutlet var characterName: UILabel!
     @IBOutlet var characterAvatar: UIImageView!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var addToFavButton: UIButton!
     
-    var delegate: RandomCharacterVCDelegate!
     
     private var character: Character?
     private var jsonInfo: RickAndMorty?
     private var spinnerView = UIActivityIndicatorView()
-    
-   
+    var delegate: RandomCharacterViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchInfo(from: Link.rickAndMortyApi.rawValue)
         addToFavButton.setImage(UIImage.init(systemName: "heart.fill"), for: .normal)
+        
     }
     
     override func viewWillLayoutSubviews() {
         characterAvatar.layer.cornerRadius = characterAvatar.frame.width / 2
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let favouritesViewController = segue.destination as? FavouritesTableVC else { return }
+//
+//        favouritesViewController.character = character
+//    }
     
     @IBAction func fetchCharacter(_ sender: UIButton) {
         fetchChar()
@@ -38,13 +43,20 @@ class RandomCharacterVC: UIViewController {
     }
     
     @IBAction func addToFavourite(_ sender: UIButton) {
-        print("001 \(character)")
+        
+        print("001 \(character!.id)")
         guard let character = character else { return }
-        print ("002 \(character)")
-        StorageManager.shared.addToFav(character: character)
-        print("003 \(character)")
-        delegate.add(character: character)
-        dismiss(animated: true)
+        TransferManager.shared.transferedCharacter = character
+        
+//        print ("002 \(character.id)")
+//        StorageManager.shared.addToFav(character: character)
+//        print("003 \(character.id)")
+//        print(delegate)
+//        delegate.add(character: character)
+//        print("004 \(character.id)")
+//        dismiss(animated: true)
+        save()
+        
     }
 }
 
@@ -94,6 +106,7 @@ extension RandomCharacterVC {
             switch result {
             case .success(let imageData):
                 self.characterAvatar.image = UIImage(data: imageData)
+                TransferManager.shared.transferedAvatar = UIImage(data: imageData)
                 self.spinnerView.stopAnimating()
             case .failure(let error):
                 print(error)
@@ -111,4 +124,17 @@ extension RandomCharacterVC {
         
         view.addSubview(spinnerView)
     }
+    
+    private func save() {
+        guard let character = character else { return }
+
+        
+        
+        StorageManager.shared.addToFav(character: character)
+        
+
+        dismiss(animated: true)
+    }
 }
+
+
